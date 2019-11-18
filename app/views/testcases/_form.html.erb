@@ -1,0 +1,32 @@
+<%= form_with model: @testcase, local: true do |form| %>
+
+    <% if @testcase.errors.any? %>
+        <div id="error_explanation">
+            <h2>
+                <%= pluralize(@testcase.errors.count, "error") %> prohibited this testcase from being saved:
+            </h2>
+            <ul>
+                <% @testcase.errors.full_messages.each do |msg| %>
+                    <li><%= msg %></li>
+                <% end %>
+            </ul>
+        </div>
+    <% end %>
+
+    <div class="form-group">
+        <%= form.label :title %><br>
+        <%= form.text_field :title, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+        <%= form.label :description %><br>
+        <%= form.text_area :description, class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+        <%= form.label :path %><br>
+        <%= form.file_field :attachment, class: "form-control-file" %>
+    </div>
+
+    <%= form.submit "Save", :class => "btn btn-dark" %>
+<% end %>

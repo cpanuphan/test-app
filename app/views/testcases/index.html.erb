@@ -1,0 +1,32 @@
+<h1 class="mt-3 mb-3">Listing Testcases</h1>
+
+<%= link_to 'New Testcase', new_testcase_path, class: "btn btn-dark" %><br>
+
+<table class="table mt-3">
+  <tr class="thead-dark">
+    <th>Title</th>
+    <th>Text</th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+  <% @testcases.each do |testcase| %>
+    <tr>
+      <td><%= testcase.title %></td>
+      <td><%= testcase.description %></td>
+      <td><%= link_to "Download", testcase.attachment_url %></td>
+      <td><%= link_to 'Edit', edit_testcase_path(testcase) %></td>
+      <td>
+        <%= link_to run_path(testcase) do %>
+          <%= octicon 'play', :height => 25, :style => "cursor: pointer", :"aria-label" => "run testcase" %>
+        <% end %>
+      </td>
+      <td><%= link_to testcase_path(testcase), method: :delete, data: { confirm: 'Are you sure?' } do %>
+                <%= octicon "trashcan", :height => 25, :style => "cursor: pointer", :"aria-label" => "delete testcase" %>
+          <% end %>
+      </td>
+    </tr>
+  <% end %>
+</table>
